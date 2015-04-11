@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="demo"></p>
+
+<h2>Publish / Subscribe</h2>
+<br/>
+<button data-role="publish">Publish</button>
+
+<p data-role="result-container">
+  <span data-role="result"></span>
+</p>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="./subscription.js"></script>
+<script>
+
+(function($,window,document,undefined){
+
+  $(document).ready(function(){
+     var eventName = "pub-sub-event";
+
+     SubscriptionModel.subscribe(eventName,function(){
+       var element = $("p[data-role='result-container']").find("span[data-role='result']");
+       $(element).html("Publish-Subscribe Event Example");
+     });
+
+     $("button[data-role='publish']").on("click",function(){
+       SubscriptionModel.publish(eventName);
+     });
+
+  });
+})(jQuery,window,document);
+
+</script>
+
+</body>
+</html>
